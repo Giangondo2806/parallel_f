@@ -4,6 +4,7 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { FilesModule } from './files/files.module';
+import { ResourcesModule } from './resources/resources.module';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { User } from './entities/user.entity';
 import { Department } from './entities/department.entity';
@@ -33,6 +34,7 @@ import { UpdateHistory } from './entities/update-history.entity';
     ]),
     AuthModule,
     FilesModule,
+    ResourcesModule,
     DashboardModule,
   ],
   controllers: [AppController],
