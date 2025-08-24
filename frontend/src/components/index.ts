@@ -8,6 +8,12 @@ export { default as Providers } from './providers';
 
 // Layout components
 export { default as DashboardLayout } from './layout/DashboardLayout';
+
+// Dashboard components
+export { DashboardStatsCards } from './dashboard/DashboardStatsCards';
+export { DepartmentBreakdown } from './dashboard/DepartmentBreakdown';
+export { RecentActivities } from './dashboard/RecentActivities';
+export { QuickActions } from './dashboard/QuickActions';
 export { default as Header } from './layout/Header';
 export { default as Sidebar } from './layout/Sidebar';
 export { default as Footer } from './layout/Footer';
