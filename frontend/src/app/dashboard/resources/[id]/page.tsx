@@ -1,20 +1,34 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useState, useEffect } from 'react';
+import { useRouter, useParams } from 'next/navigation';
 import {
   Box,
   Card,
   CardHeader,
   CardContent,
+  TextField,
+  Select,
+  MenuItem,
+  FormControl,
+  InputLabel,
   Button,
   Typography,
+  Alert,
   CircularProgress,
+  Chip,
   IconButton,
+  Paper,
+  Stack,
 } from '@mui/material';
 import {
   Save as SaveIcon,
   ArrowBack as ArrowBackIcon,
+  Delete as DeleteIcon,
+  Upload as UploadIcon,
+  Download as DownloadIcon,
+  FilePresent as FilePresentIcon,
+  DeleteForever as DeleteForeverIcon,
 } from '@mui/icons-material';
 import { ResourceFormData } from '../../../../types/resource.types';
 import { CVManagement, CVFile } from '../../../../components/resources/CVManagement';
@@ -35,8 +49,39 @@ const MOCK_STATUSES = [
   { value: 'Training', label: 'Training' },
 ];
 
-export default function AddResourcePage() {
+// Mock resource data for editing
+const MOCK_RESOURCE_DATA = {
+  resourceId: 1,
+  employeeCode: 'EMP001',
+  fullName: 'Nguyen Van A',
+  email: 'nguyen.a@company.com',
+  phone: '+84 901 234 567',
+  jobTitle: 'Software Engineer',
+  skillSet: 'Java, Spring Boot, ReactJS, MySQL',
+  departmentId: 1,
+  idleFrom: '2025-01-06',
+  idleTo: '',
+  status: 'Available',
+  processNote: 'Contact with client ABC on 01/08, waiting response...\nUpdated skills based on latest training...',
+  rate: '500$',
+  isUrgent: true,
+  cvFiles: [
+    {
+      cvId: 1,
+      fileName: 'nguyen_cv.pdf',
+      fileType: 'PDF',
+      fileSize: 2048576,
+      uploadedAt: '2025-01-10T09:30:00Z',
+    },
+  ],
+};
+
+export default function ResourceDetailPage() {
   const router = useRouter();
+  const params = useParams();
+  const resourceId = params.id as string;
+
+  const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [formData, setFormData] = useState<ResourceFormData>({
     employeeCode: '',
@@ -56,6 +101,31 @@ export default function AddResourcePage() {
   const [isUrgent, setIsUrgent] = useState(false);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [uploadingCV, setUploadingCV] = useState(false);
+
+  // Load existing resource data
+  useEffect(() => {
+    setLoading(true);
+    // Simulate API call delay
+    setTimeout(() => {
+      setFormData({
+        employeeCode: MOCK_RESOURCE_DATA.employeeCode,
+        fullName: MOCK_RESOURCE_DATA.fullName,
+        email: MOCK_RESOURCE_DATA.email,
+        phone: MOCK_RESOURCE_DATA.phone || '',
+        jobTitle: MOCK_RESOURCE_DATA.jobTitle || '',
+        skillSet: MOCK_RESOURCE_DATA.skillSet || '',
+        departmentId: MOCK_RESOURCE_DATA.departmentId,
+        idleFrom: MOCK_RESOURCE_DATA.idleFrom,
+        idleTo: MOCK_RESOURCE_DATA.idleTo || '',
+        status: MOCK_RESOURCE_DATA.status,
+        processNote: MOCK_RESOURCE_DATA.processNote || '',
+        rate: MOCK_RESOURCE_DATA.rate || '',
+      });
+      setCvFiles(MOCK_RESOURCE_DATA.cvFiles || []);
+      setIsUrgent(MOCK_RESOURCE_DATA.isUrgent);
+      setLoading(false);
+    }, 500);
+  }, [resourceId]);
 
   const handleInputChange = (field: keyof ResourceFormData, value: string | number) => {
     setFormData(prev => ({
@@ -122,16 +192,28 @@ export default function AddResourcePage() {
 
     setSaving(true);
     try {
-      // TODO: Implement actual API call to create new resource
+      // TODO: Implement actual API call
       await new Promise(resolve => setTimeout(resolve, 1000)); // Simulate API call
       
       // Show success message and navigate back
-      router.push('/dashboard/resources?created=true');
+      router.push('/dashboard/resources?saved=true');
     } catch (error) {
-      console.error('Error creating resource:', error);
+      console.error('Error saving resource:', error);
       // TODO: Show error notification
     } finally {
       setSaving(false);
+    }
+  };
+
+  const handleDelete = async () => {
+    if (window.confirm('Are you sure you want to delete this resource?')) {
+      try {
+        // TODO: Implement actual API call
+        await new Promise(resolve => setTimeout(resolve, 500));
+        router.push('/dashboard/resources?deleted=true');
+      } catch (error) {
+        console.error('Error deleting resource:', error);
+      }
     }
   };
 
@@ -161,6 +243,14 @@ export default function AddResourcePage() {
     setCvFiles(prev => prev.filter(cv => cv.cvId !== cvId));
   };
 
+  if (loading) {
+    return (
+      <Box display="flex" justifyContent="center" alignItems="center" minHeight="400px">
+        <CircularProgress />
+      </Box>
+    );
+  }
+
   return (
     <Box sx={{ p: 3 }}>
       {/* Header */}
@@ -169,8 +259,16 @@ export default function AddResourcePage() {
           <ArrowBackIcon />
         </IconButton>
         <Typography variant="h4">
-          Add New Resource
+          {`Edit Resource - ${formData.fullName || 'Loading...'}`}
         </Typography>
+        {isUrgent && (
+          <Chip 
+            label="URGENT" 
+            color="error" 
+            variant="filled" 
+            icon={<span>🔥</span>}
+          />
+        )}
       </Box>
 
       {/* Content using Flexbox Layout */}
@@ -197,7 +295,7 @@ export default function AddResourcePage() {
             departments={MOCK_DEPARTMENTS}
             statuses={MOCK_STATUSES}
             isUrgent={isUrgent}
-            showProcessNotes={false} // Hide process notes for new resources
+            showProcessNotes={true}
           />
         </Box>
 
@@ -230,12 +328,20 @@ export default function AddResourcePage() {
         </Button>
         <Box display="flex" gap={2}>
           <Button
+            variant="outlined"
+            color="error"
+            startIcon={<DeleteIcon />}
+            onClick={handleDelete}
+          >
+            Delete
+          </Button>
+          <Button
             variant="contained"
             startIcon={saving ? <CircularProgress size={20} /> : <SaveIcon />}
             onClick={handleSave}
             disabled={saving}
           >
-            {saving ? 'Creating...' : 'Create Resource'}
+            {saving ? 'Updating...' : 'Update Resource'}
           </Button>
         </Box>
       </Box>
