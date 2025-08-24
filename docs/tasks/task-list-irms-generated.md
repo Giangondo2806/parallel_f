@@ -12,8 +12,8 @@
 | F006 | File Upload Service | Implement file upload service with multer configuration, file validation (PDF, DOC, DOCX, XLS, XLSX), size limits (10MB), secure file storage, and download functionality | F003 | Senior Dev |
 | F007 | Role-based Access Control | Implement role-based permissions system with decorators, guards, and middleware for Admin, RA, Manager, Viewer roles across all endpoints | F002, F003 | Senior Dev |
 | F008 | Login Screen Implementation | Complete S-01-01 Login Screen with form validation, authentication flow, session management, remember me functionality, and error handling | F002, F004, F005 | Senior Dev |
-| F009 | Common Components & Utilities | Create reusable UI components (DataTable, FormControls, Modals, Notifications), utility functions, constants, and TypeScript type definitions | F004 | Senior Dev |
-| F010 | Database Seeding & Test Data | Create comprehensive seed data including admin user, departments, sample idle resources, and test scenarios for development and testing | F001 | Senior Dev |
+| F009 | Layout Implementation | Create layout components (Header, Sidebar, Footer) with responsive design and navigation & empty page for idle resources , dashboard ...etc | F004, F005, F008 | Senior Dev |
+| F010 | Common Components & Utilities | Create reusable UI components (DataTable, FormControls, Modals, Notifications), utility functions, constants, and TypeScript type definitions | F004 | Senior Dev |
 
 ## 2. Business Screen Base Coding Tasks
 
