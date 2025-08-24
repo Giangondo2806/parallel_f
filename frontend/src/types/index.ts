@@ -20,6 +20,9 @@ export enum UserRole {
   VIEWER = 'Viewer',
 }
 
+// Dashboard types
+export * from './dashboard';
+
 export interface Department {
   departmentId: number;
   departmentName: string;
