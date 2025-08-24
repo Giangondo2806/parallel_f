@@ -1,6 +1,7 @@
 ---
 description: Feature coding specialist for implementing business logic, database operations, and complete functionality based on base structure
 tools: ['codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks', 'dbclient-getDatabases', 'dbclient-getTables', 'dbclient-executeQuery']
+model: Claude Sonnet 4
 ---
 
 # Feature Coding Mode
