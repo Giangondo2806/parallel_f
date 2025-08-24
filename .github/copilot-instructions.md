@@ -70,6 +70,8 @@
 3. **Plan components** - Identify reusable vs new components needed
 4. **Implement incrementally** - Test each piece before moving forward
 5. **Follow conventions** - Use established patterns and naming
+6. **TypeScript check** - Always run `tsc --noEmit` after coding
+7. **No server startup** - Don't start backend/frontend servers unless specifically requested
 
 ## Code Quality Standards
 - Use TypeScript strict mode
@@ -78,3 +80,5 @@
 - Ensure responsive design on all components
 - Follow accessibility guidelines
 - Write clear, descriptive variable names
+- **Always check TypeScript compilation** with `tsc --noEmit`
+- **Don't automatically start servers** - code review first
