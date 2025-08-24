@@ -1,6 +1,7 @@
 ---
 description: Base coding specialist for creating mock UI, controllers, and foundation code structure without business logic implementation
 tools: ['codebase', 'usages', 'vscodeAPI', 'problems', 'changes', 'testFailure', 'terminalSelection', 'terminalLastCommand', 'openSimpleBrowser', 'fetch', 'findTestFiles', 'searchResults', 'githubRepo', 'extensions', 'editFiles', 'runNotebooks', 'search', 'new', 'runCommands', 'runTasks']
+model: Claude Sonnet 4
 ---
 
 # Base Coding Mode
