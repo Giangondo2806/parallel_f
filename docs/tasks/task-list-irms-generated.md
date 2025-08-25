@@ -41,7 +41,7 @@
 | BE009 | S-03-01 User Management | S03-EVT-07 | Bulk User Operations | Implement bulk actions for multiple users including activate, deactivate, and bulk delete with confirmation | BC002 | Mid Dev |
 | BE010 | S-03-01 User Management | S03-EVT-08,S03-EVT-09 | Import/Export Users | Implement user import from CSV/Excel with validation, duplicate checking, and export functionality with role-based data filtering | BC002 | Mid Dev |
 | BE011 | S-04-01 Resource List | S04-EVT-01 | Resource List Loading & Role Filtering | Implement resource list loading with role-based data filtering, department restrictions for Managers, and column visibility by role | BC003 | Mid Dev |
-| BE012 | S-04-01 Resource List | S04-EVT-02,S04-EVT-03 | Search & Advanced Filtering | Implement search across name, skills, department with advanced filters for status, dates, urgency, and filter persistence | BC003 | Mid Dev |
+| BE012 | S-04-01 Resource List | S04-EVT-02,S04-EVT-03 | Search & Advanced Filtering | Implement search across name, skills, department with advanced filters for status, dates, urgency | BC003 | Mid Dev |
 | BE013 | S-04-01 Resource List | S04-EVT-04,S04-EVT-05 | Add/Edit Resource Navigation | Implement resource creation and editing navigation with permission checks and data pre-loading | BC003, BC004 | Mid Dev |
 | BE014 | S-04-01 Resource List | S04-EVT-06,S04-EVT-07 | Delete Resources | Implement single and bulk resource deletion with permission validation, CV cleanup, and history logging | BC003 | Mid Dev |
 | BE015 | S-04-01 Resource List | S04-EVT-08,S04-EVT-09 | Import/Export Resources | Implement resource import from CSV with comprehensive validation, duplicate checking, and export with role-based column filtering | BC003 | Mid Dev |
